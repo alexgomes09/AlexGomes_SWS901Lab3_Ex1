@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.alexgomes_sws901lab3_ex2" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/main_screen"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".Splash_screen"
+            android:label="@string/main_screen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Player"
+            android:label="@string/player_info">
+        </activity>
+        <activity
+            android:name=".ViewPlayer"
+            android:label="@string/player_list">
+        </activity>
+
+    </application>
+
+</manifest>
