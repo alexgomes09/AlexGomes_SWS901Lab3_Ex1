@@ -26,7 +26,6 @@ public class ViewPlayer extends Activity {
 
     ListView playerListView;
     ImageButton deletePlayer;
-    String[] singlePlayer;
     Button btnDeletePlayer;
 
     @Override
@@ -35,42 +34,54 @@ public class ViewPlayer extends Activity {
         setContentView(R.layout.view_player);
 
         playerListView = (ListView) findViewById(R.id.playerList);
+        deletePlayer = (ImageButton) findViewById(R.id.deletePlayer);
         btnDeletePlayer = (Button)findViewById(R.id.btnDeletePlayer);
 
-        final DatabaseManager database = new DatabaseManager(getBaseContext());
-        singlePlayer = database.GetAllPlayer();
-
-        List
+        playerListView.setAdapter(new CustomAdapter(this));
 
     }
 }
 class CustomAdapter extends BaseAdapter{
 
+    DatabaseManager database;
+    Context context;
     TextView playerList;
+    String[] players = database.GetAllPlayer();
+
+    public CustomAdapter(Context c){
+        context = c;
+//        players = database.GetAllPlayer();
+
+        for (int i = 0; i < players.length; i++) {
+            String player = players[i];
+        }
+    }
 
     @Override
     public int getCount() {
-        return 0;
+        return players.length;
     }
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return players[i];
     }
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return i;
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        view = inflater.inflate(R.layout.single_player_list, null);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        view = inflater.inflate(R.layout.single_player_list,viewGroup,false);
         playerList = (TextView) view.findViewById(R.id.playerList);
-        playerList.setText(list1[position]); **// Problem in this line**
+        playerList.setText(players[i]);
 
         return view;
     }
 }
+
 
