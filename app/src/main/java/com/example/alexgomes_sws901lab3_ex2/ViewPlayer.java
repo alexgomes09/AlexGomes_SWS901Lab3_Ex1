@@ -2,22 +2,15 @@ package com.example.alexgomes_sws901lab3_ex2;
 
 import android.app.Activity;
 import android.content.Context;
-import android.media.Image;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by Alex on 10/16/2014.
@@ -25,8 +18,9 @@ import android.widget.Toast;
 public class ViewPlayer extends Activity {
 
     ListView playerListView;
-    ImageButton deletePlayer;
     Button btnDeletePlayer;
+    boolean refreshPage = false;
+    CustomAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,37 +28,46 @@ public class ViewPlayer extends Activity {
         setContentView(R.layout.view_player);
 
         playerListView = (ListView) findViewById(R.id.playerList);
-        deletePlayer = (ImageButton) findViewById(R.id.deletePlayer);
         btnDeletePlayer = (Button)findViewById(R.id.btnDeletePlayer);
 
-        playerListView.setAdapter(new CustomAdapter(this));
+        adapter = new CustomAdapter(this);
+
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                adapter.notifyDataSetInvalidated();
+                playerListView.setAdapter(adapter);
+
+            }
+        });
 
     }
+
 }
 class CustomAdapter extends BaseAdapter{
 
-    DatabaseManager database;
     Context context;
+    DatabaseManager database;
     TextView playerList;
-    String[] players = database.GetAllPlayer();
+    String[] players;
+    ImageButton deletePlayer;
+    ViewPlayer viewPlayer;
+
 
     public CustomAdapter(Context c){
         context = c;
-//        players = database.GetAllPlayer();
-
-        for (int i = 0; i < players.length; i++) {
-            String player = players[i];
-        }
+        database = new DatabaseManager(context);
+        players = database.GetAllPlayer();
     }
 
     @Override
     public int getCount() {
-        return players.length;
+        return database.GetAllPlayer().length;
     }
 
     @Override
     public Object getItem(int i) {
-        return players[i];
+        return database.GetAllPlayer()[i];
     }
 
     @Override
@@ -73,12 +76,23 @@ class CustomAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int i, View view, final ViewGroup viewGroup) {
+        final int position = i;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         view = inflater.inflate(R.layout.single_player_list,viewGroup,false);
         playerList = (TextView) view.findViewById(R.id.playerList);
-        playerList.setText(players[i]);
+        playerList.setText(players[position]);
+
+        viewPlayer = new ViewPlayer();
+
+        deletePlayer = (ImageButton) view.findViewById(R.id.deletePlayer);
+        deletePlayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                database.DeletePlayer(getItem(position).toString());
+            }
+        });
 
         return view;
     }
