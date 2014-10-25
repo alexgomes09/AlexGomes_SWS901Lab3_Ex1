@@ -1,16 +1,22 @@
 package com.example.alexgomes_sws901lab3_ex2;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Alex on 10/16/2014.
@@ -19,8 +25,7 @@ public class ViewPlayer extends Activity {
 
     ListView playerListView;
     Button btnDeletePlayer;
-    boolean refreshPage = false;
-    CustomAdapter adapter;
+    public CustomAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +36,63 @@ public class ViewPlayer extends Activity {
         btnDeletePlayer = (Button)findViewById(R.id.btnDeletePlayer);
 
         adapter = new CustomAdapter(this);
+        playerListView.setAdapter(adapter);
 
-        this.runOnUiThread(new Runnable() {
+        playerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void run() {
-                adapter.notifyDataSetInvalidated();
-                playerListView.setAdapter(adapter);
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                final DatabaseManager database = new DatabaseManager(ViewPlayer.this);
+                LayoutInflater li = LayoutInflater.from(ViewPlayer.this);
+                View promptsView = li.inflate(R.layout.edit_player_prompt, null);
 
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ViewPlayer.this);
+
+                // set prompts.xml to alertdialog builder
+                alertDialogBuilder.setView(promptsView);
+
+                final EditText firstName = (EditText) promptsView.findViewById(R.id.promptFirstName);
+                final EditText lastName = (EditText) promptsView.findViewById(R.id.promptLastName);
+                final EditText userName= (EditText) promptsView.findViewById(R.id.promptUserName);
+                final EditText password = (EditText) promptsView.findViewById(R.id.promptPassword);
+                String playerName = adapterView.getItemAtPosition(i).toString();
+
+                String[] firstLastName= playerName.split("\\s+");
+                final Player player = database.GetPlayer(firstLastName[0],firstLastName[1]);
+
+                firstName.setText(firstLastName[0]);
+                lastName.setText(firstLastName[1]);
+                userName.setText(player.getUserName());
+                password.setText(player.getPassword());
+                final String fName = firstName.getText().toString();
+                final String lName = lastName.getText().toString();
+                final String userN = userName.getText().toString();
+                final String pass = password.getText().toString();
+                player.setFirstName(fName);
+                player.setLastName(lName);
+                player.setUserName(userN);
+                player.setPassword(pass);
+                // set dialog message
+                alertDialogBuilder
+                        .setCancelable(false)
+                        .setPositiveButton("SAVE",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        database.ModifyPlayer(player);
+                                        //Toast.makeText(ViewPlayer.this,"Player Modified",Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
             }
         });
 
@@ -51,7 +106,6 @@ class CustomAdapter extends BaseAdapter{
     TextView playerList;
     String[] players;
     ImageButton deletePlayer;
-    ViewPlayer viewPlayer;
 
 
     public CustomAdapter(Context c){
@@ -84,18 +138,19 @@ class CustomAdapter extends BaseAdapter{
         playerList = (TextView) view.findViewById(R.id.playerList);
         playerList.setText(players[position]);
 
-        viewPlayer = new ViewPlayer();
-
         deletePlayer = (ImageButton) view.findViewById(R.id.deletePlayer);
         deletePlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 database.DeletePlayer(getItem(position).toString());
+                notifyDataSetChanged();
+                view.postInvalidate();
             }
         });
-
         return view;
     }
+
 }
+
 
 

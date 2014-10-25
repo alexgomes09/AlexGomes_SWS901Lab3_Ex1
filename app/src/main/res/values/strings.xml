@@ -23,4 +23,5 @@
 
     <!--View Player Screen-->
     <string name="btnDeletePlayer">Delete</string>
+
 </resources>

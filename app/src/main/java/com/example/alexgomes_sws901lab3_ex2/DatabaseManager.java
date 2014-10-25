@@ -65,7 +65,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public Player GetPlayer(String firstName, String lastName){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String getPlayerQuery = "SELECT * FROM"+PLAYER_TABLE+"WHERE"+PLAYER_COLUMNS[1]+"="+firstName+"AND"+PLAYER_COLUMNS[2]+"="+lastName;
+        String getPlayerQuery = "SELECT * FROM "+PLAYER_TABLE+" WHERE "+PLAYER_COLUMNS[1]+" = '"+firstName+"' AND "+PLAYER_COLUMNS[2]+" = '"+lastName+"'";
         Cursor cursor = db.rawQuery(getPlayerQuery,null);
 
         if(cursor !=null){
@@ -94,6 +94,23 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }
         return array;
     }
+    public void ModifyPlayer(Player player) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        String query = "UPDATE " + PLAYER_TABLE+ " SET "+ PLAYER_COLUMNS[1] + " = '"+firstname+"' , "+PLAYER_COLUMNS[2]+
+                " = '"+lastname+"' , "+PLAYER_COLUMNS[3]+" = '"+username+"' ,"+PLAYER_COLUMNS[4]+" = '"+password+"' WHERE "+
+                PLAYER_COLUMNS[1]+" LIKE '"+firstname+"' AND "+PLAYER_COLUMNS[2]+" LIKE '"+lastname+"' AND "+PLAYER_COLUMNS[3]+" LIKE '"+
+                username+"' AND "+PLAYER_COLUMNS[4]+" LIKE '"+password+"'";
+
+        SQLiteStatement stmt = database.compileStatement(query);
+        stmt.execute();
+
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put(PLAYER_COLUMNS[1],player.getFirstName());
+//        contentValues.put(PLAYER_COLUMNS[2],player.getLastName());
+//        contentValues.put(PLAYER_COLUMNS[3],player.getUserName());
+//        contentValues.put(PLAYER_COLUMNS[4],player.getPassword());
+//        database.update(PLAYER_TABLE,contentValues,PLAYER_COLUMNS[1]+"=?",new String []{String.valueOf(player.getFirstName())});
+    }
 
     public void DeletePlayer(String playerName){
         SQLiteDatabase database = this.getWritableDatabase();
@@ -118,8 +135,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
                 " IN ('"+lName+"')";
 
         SQLiteStatement stmt = database.compileStatement(query);
-       // SQLiteStatement stmt = database.compileStatement("delete from Player where firstname = Alex and lastname = Gomes");
-        //stmt.bindString(1, "US");
         stmt.execute();
     }
 
