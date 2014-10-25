@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.alexgomes_sws901lab3_ex2" >
+    package="com.example.alexgomes_sws901lab3_ex1" >
 
     <application
         android:allowBackup="true"
@@ -8,7 +8,7 @@
         android:label="@string/main_screen"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".Splash_screen"
+            android:name="com.example.alexgomes_sws901lab3_ex1.Splash_screen"
             android:label="@string/main_screen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,12 +16,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Player"
+            android:name="com.example.alexgomes_sws901lab3_ex1.Player"
             android:label="@string/player_info">
         </activity>
         <activity
-            android:name=".ViewPlayer"
+            android:name="com.example.alexgomes_sws901lab3_ex1.ViewPlayer"
             android:label="@string/player_list">
+        </activity>
+        <activity
+            android:name=".GameList"
+            android:label="@string/game_list">
         </activity>
 
     </application>

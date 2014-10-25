@@ -19,7 +19,8 @@
         android:ems="10"
         android:id="@+id/firstName"
         android:layout_margin="5dp"
-        android:digits="@string/onlyLetter" />
+        android:digits="@string/onlyLetter"
+        android:singleLine="true" />
 
     <TextView
         android:layout_width="fill_parent"
@@ -35,7 +36,8 @@
         android:ems="10"
         android:id="@+id/lastName"
         android:layout_margin="5dp"
-        android:digits="@string/onlyLetter" />
+        android:digits="@string/onlyLetter"
+        android:singleLine="true" />
 
     <TextView
         android:layout_width="fill_parent"
@@ -51,7 +53,8 @@
         android:ems="10"
         android:id="@+id/username"
         android:layout_margin="5dp"
-        android:digits="@string/onlyLetter" />
+        android:digits="@string/onlyLetter"
+        android:singleLine="true" />
 
     <TextView
         android:layout_width="fill_parent"
@@ -67,7 +70,8 @@
         android:id="@+id/password"
         android:layout_margin="5dp"
         android:inputType="textPassword"
-        android:digits="@string/onlyLetterAndNumber" />
+        android:digits="@string/onlyLetterAndNumber"
+        android:singleLine="true" />
 
     <TableRow android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -83,19 +87,21 @@
             android:paddingBottom="15dp"
             android:textSize="30sp"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp" />
+            android:layout_margin="10dp"
+            android:textStyle="bold" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btnViewPlayer"
-            android:id="@+id/btnViewPlayer"
+            android:id="@+id/splash_screen_btnViewPlayer"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:textSize="30dp"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp" />
+            android:layout_margin="10dp"
+            android:textStyle="bold" />
     </TableRow>
 
 </LinearLayout>

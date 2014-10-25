@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gameName"
+        android:id="@+id/editText"
+        android:textSize="20dp"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="3dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gameName"
+        android:layout_gravity="center_horizontal"
+        android:digits="@string/onlyLetter"
+        android:hint="@string/hintGameName"
+        android:singleLine="true"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gameDescription"
+        android:id="@+id/textView3"
+        android:textSize="20dp"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="3dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gameDescription"
+        android:layout_gravity="center_horizontal"
+        android:digits="@string/onlyLetterWithSpace"
+        android:hint="@string/hintGameDescription"
+        android:singleLine="true"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/publisherID"
+        android:id="@+id/textView4"
+        android:textSize="20dp"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="3dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/publisherID"
+        android:layout_gravity="center_horizontal"
+        android:digits="@string/onlyNumber"
+        android:hint="@string/hintPublisherID"
+        android:singleLine="true"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/developerID"
+        android:id="@+id/textView5"
+        android:textSize="20dp"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="3dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/developerID"
+        android:layout_gravity="center_horizontal"
+        android:digits="@string/onlyNumber"
+        android:hint="@string/hintDeveloperID"
+        android:singleLine="true"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/genreID"
+        android:id="@+id/textView9"
+        android:textSize="20dp"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="3dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/genreID"
+        android:layout_gravity="center_horizontal"
+        android:digits="@string/onlyNumber"
+        android:hint="@string/hintGenreID"
+        android:singleLine="true"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:weightSum="1">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/btnAddGame"
+            android:text="@string/btnAddGame"
+            android:layout_marginRight="24dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="24dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/btnViewGame"
+            android:text="@string/btnViewGame"
+            android:layout_marginRight="24dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="24dp"
+            android:textStyle="bold" />
+    </TableRow>
+
+</LinearLayout>

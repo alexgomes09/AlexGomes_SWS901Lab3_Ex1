@@ -8,22 +8,15 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".splash_screen">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/firstName" />
-
     <ImageView
         android:src="@drawable/splash_screen_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
-        android:layout_below="@+id/firstName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="0dp" />
+        android:layout_centerHorizontal="true" />
 
     <Button
-        android:text="@string/splash_screen_button"
+        android:text="@string/splash_screen_btnAddPlayer"
         android:width="180dp"
         android:height="65dp"
         android:textSize="35sp"
@@ -33,8 +26,41 @@
         android:layout_alignParentTop="false"
         android:layout_alignWithParentIfMissing="false"
         android:layout_alignParentBottom="false"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:id="@+id/btnSplashNext" />
+        android:layout_marginTop="30dp"
+        android:id="@+id/splash_screen_btnAddPlayer"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="@string/splash_screen_btnViewPlayer"
+        android:width="180dp"
+        android:height="65dp"
+        android:textSize="35sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignWithParentIfMissing="false"
+        android:id="@+id/splash_screen_btnViewPlayer"
+        android:layout_below="@+id/splash_screen_btnAddPlayer"
+        android:layout_alignRight="@+id/splash_screen_btnAddPlayer"
+        android:layout_alignEnd="@+id/splash_screen_btnAddPlayer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="@string/splash_screen_btnGameList"
+        android:width="180dp"
+        android:height="65dp"
+        android:textSize="35sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignWithParentIfMissing="false"
+        android:id="@+id/splash_screen_btnAddGame"
+        android:layout_below="@+id/splash_screen_btnViewPlayer"
+        android:layout_alignRight="@+id/splash_screen_btnViewPlayer"
+        android:layout_alignEnd="@+id/splash_screen_btnViewPlayer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
