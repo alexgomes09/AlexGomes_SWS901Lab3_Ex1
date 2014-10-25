@@ -24,7 +24,6 @@ import android.widget.Toast;
 public class ViewPlayer extends Activity {
 
     ListView playerListView;
-    Button btnDeletePlayer;
     public CustomAdapter adapter;
 
     @Override
@@ -33,7 +32,6 @@ public class ViewPlayer extends Activity {
         setContentView(R.layout.view_player);
 
         playerListView = (ListView) findViewById(R.id.playerList);
-        btnDeletePlayer = (Button)findViewById(R.id.btnDeletePlayer);
 
         adapter = new CustomAdapter(this);
         playerListView.setAdapter(adapter);
@@ -63,21 +61,25 @@ public class ViewPlayer extends Activity {
                 lastName.setText(firstLastName[1]);
                 userName.setText(player.getUserName());
                 password.setText(player.getPassword());
-                final String fName = firstName.getText().toString();
-                final String lName = lastName.getText().toString();
-                final String userN = userName.getText().toString();
-                final String pass = password.getText().toString();
-                player.setFirstName(fName);
-                player.setLastName(lName);
-                player.setUserName(userN);
-                player.setPassword(pass);
+
+                final String whereFirstNameIs = firstLastName[0].toString();
+
                 // set dialog message
                 alertDialogBuilder
                         .setCancelable(false)
                         .setPositiveButton("SAVE",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
-                                        database.ModifyPlayer(player);
+
+                                        String fName = firstName.getText().toString();
+                                        String lName = lastName.getText().toString();
+                                        String userN = userName.getText().toString();
+                                        String pass = password.getText().toString();
+                                        player.setFirstName(fName);
+                                        player.setLastName(lName);
+                                        player.setUserName(userN);
+                                        player.setPassword(pass);
+                                        database.ModifyPlayer(player,whereFirstNameIs);
                                         //Toast.makeText(ViewPlayer.this,"Player Modified",Toast.LENGTH_SHORT).show();
                                     }
                                 })

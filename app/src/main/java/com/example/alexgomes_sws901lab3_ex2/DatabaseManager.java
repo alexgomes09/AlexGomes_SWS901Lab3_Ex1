@@ -94,22 +94,22 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }
         return array;
     }
-    public void ModifyPlayer(Player player) {
+    public void ModifyPlayer(Player player, String whereFirstNameIs) {
         SQLiteDatabase database = this.getWritableDatabase();
-        String query = "UPDATE " + PLAYER_TABLE+ " SET "+ PLAYER_COLUMNS[1] + " = '"+firstname+"' , "+PLAYER_COLUMNS[2]+
-                " = '"+lastname+"' , "+PLAYER_COLUMNS[3]+" = '"+username+"' ,"+PLAYER_COLUMNS[4]+" = '"+password+"' WHERE "+
-                PLAYER_COLUMNS[1]+" LIKE '"+firstname+"' AND "+PLAYER_COLUMNS[2]+" LIKE '"+lastname+"' AND "+PLAYER_COLUMNS[3]+" LIKE '"+
-                username+"' AND "+PLAYER_COLUMNS[4]+" LIKE '"+password+"'";
+//        String query = "UPDATE " + PLAYER_TABLE+ " SET "+ PLAYER_COLUMNS[1] + " = '"+player.getFirstName()+"' , "+PLAYER_COLUMNS[2]+
+//                " = '"+player.getLastName()+"' , "+PLAYER_COLUMNS[3]+" = '"+player.getUserName()+"' ,"+PLAYER_COLUMNS[4]+" = '"+player.getPassword()
+//                +"' WHERE "+PLAYER_COLUMNS[1]+" LIKE '"+player.getFirstName()+"' AND "+PLAYER_COLUMNS[2]+" LIKE '"+player.getLastName()+"'";
+//
+//        SQLiteStatement stmt = database.compileStatement(query);
+//        stmt.execute();
 
-        SQLiteStatement stmt = database.compileStatement(query);
-        stmt.execute();
-
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put(PLAYER_COLUMNS[1],player.getFirstName());
-//        contentValues.put(PLAYER_COLUMNS[2],player.getLastName());
-//        contentValues.put(PLAYER_COLUMNS[3],player.getUserName());
-//        contentValues.put(PLAYER_COLUMNS[4],player.getPassword());
-//        database.update(PLAYER_TABLE,contentValues,PLAYER_COLUMNS[1]+"=?",new String []{String.valueOf(player.getFirstName())});
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(PLAYER_COLUMNS[1],player.getFirstName());
+        contentValues.put(PLAYER_COLUMNS[2],player.getLastName());
+        contentValues.put(PLAYER_COLUMNS[3],player.getUserName());
+        contentValues.put(PLAYER_COLUMNS[4],player.getPassword());
+        database.update(PLAYER_TABLE,contentValues,PLAYER_COLUMNS[1]+"=?",new String[]{String.valueOf(whereFirstNameIs)});
+        database.close();
     }
 
     public void DeletePlayer(String playerName){
