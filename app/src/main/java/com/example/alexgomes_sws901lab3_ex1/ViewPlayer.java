@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Alex on 10/16/2014.
@@ -77,7 +78,7 @@ public class ViewPlayer extends Activity {
                                         player.setUserName(userN);
                                         player.setPassword(pass);
                                         database.ModifyPlayer(player,whereFirstNameIs);
-                                        //Toast.makeText(ViewPlayer.this,"Player Modified",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ViewPlayer.this, "Player Modified", Toast.LENGTH_SHORT).show();
                                     }
                                 })
                         .setNegativeButton("Cancel",
@@ -144,6 +145,7 @@ class CustomAdapter extends BaseAdapter{
                 database.DeletePlayer(getItem(position).toString());
                 notifyDataSetChanged();
                 view.postInvalidate();
+                Toast.makeText(context,"Player Removed",Toast.LENGTH_SHORT).show();
             }
         });
         return view;

@@ -133,12 +133,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
         SQLiteStatement stmt = database.compileStatement(query);
         stmt.execute();
     }
-
-
     /*
-    *
     * CRUD for GAME LIST TABLE;
-    *
     */
 
     // GAME LIST TABLE
