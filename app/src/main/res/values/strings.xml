@@ -26,8 +26,6 @@
     <string name="onlyNumber">0123456789</string>
     <string name="onlyLetterAndNumber">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</string>
 
-    <!--View Player Screen-->
-    <string name="btnDeletePlayer">Delete</string>
 
     <!--Add Game List Screen-->
     <string name="gameName">Name</string>
@@ -37,6 +35,8 @@
     <string name="genreID">Genre ID</string>
     <string name="btnAddGame">Add Game</string>
     <string name="btnViewGame">View Game</string>
+
+    <!--Hint for add game screen-->
 
     <string name="hintGameName">Name of the game</string>
     <string name="hintGameDescription">Description of the game</string>

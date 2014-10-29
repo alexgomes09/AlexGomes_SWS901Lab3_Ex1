@@ -7,62 +7,77 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/first_name"
+        android:text="@string/gameName"
         android:id="@+id/textView1"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="25dp"
-        android:textColor="@android:color/black" />
+        android:textSize="20dp"
+        android:textColor="@android:color/holo_blue_dark" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/promptFirstName"
+        android:id="@+id/promptGameName"
         android:layout_gravity="center_horizontal" />
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/last_name"
+        android:text="@string/gameDescription"
         android:id="@+id/textView2"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="25dp"
-        android:textColor="@android:color/black" />
+        android:textSize="20dp"
+        android:textColor="@android:color/holo_blue_dark" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/promptLastName" />
+        android:id="@+id/promptGameDescription" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/username"
+        android:text="@string/publisherID"
         android:id="@+id/textView3"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="25dp"
-        android:textColor="@android:color/black" />
+        android:textSize="20dp"
+        android:textColor="@android:color/holo_blue_dark" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/promptUserName" />
+        android:id="@+id/promptPublisherID" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/password"
+        android:text="@string/developerID"
         android:id="@+id/textView4"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="25dp"
-        android:textColor="@android:color/black" />
+        android:textSize="20dp"
+        android:textColor="@android:color/holo_blue_dark" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/promptPassword" />
+        android:id="@+id/promptDeveloperID" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/genreID"
+        android:id="@+id/textView4"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"
+        android:textColor="@android:color/holo_blue_dark" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/propmptGenreID" />
 
 </LinearLayout>

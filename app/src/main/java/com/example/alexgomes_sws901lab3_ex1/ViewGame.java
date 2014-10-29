@@ -36,31 +36,32 @@ public class ViewGame extends Activity {
         gameListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
                 final DatabaseManager database = new DatabaseManager(ViewGame.this);
                 LayoutInflater li = LayoutInflater.from(ViewGame.this);
-                View promptsView = li.inflate(R.layout.edit_player_prompt, null);
-
-                findViewById(R.id.text)
+                View promptsView = li.inflate(R.layout.edit_game_prompt, null);
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ViewGame.this);
 
                 alertDialogBuilder.setView(promptsView);
 
-                final EditText firstName = (EditText) promptsView.findViewById(R.id.promptFirstName);
-                final EditText lastName = (EditText) promptsView.findViewById(R.id.promptLastName);
-                final EditText userName= (EditText) promptsView.findViewById(R.id.promptUserName);
-                final EditText password = (EditText) promptsView.findViewById(R.id.promptPassword);
-                String playerName = adapterView.getItemAtPosition(i).toString();
+                final EditText editText1 = (EditText) promptsView.findViewById(R.id.promptGameName);
+                final EditText editText2 = (EditText) promptsView.findViewById(R.id.promptGameDescription);
+                final EditText editText3 = (EditText) promptsView.findViewById(R.id.promptPublisherID);
+                final EditText editText4 = (EditText) promptsView.findViewById(R.id.promptDeveloperID);
+                final EditText editText5 = (EditText) promptsView.findViewById(R.id.propmptGenreID);
 
-                String[] firstLastName= playerName.split("\\s+");
-                final Player player = database.GetPlayer(firstLastName[0],firstLastName[1]);
+                String gameName = adapterView.getItemAtPosition(i).toString();
 
-                firstName.setText(firstLastName[0]);
-                lastName.setText(firstLastName[1]);
-                userName.setText(player.getUserName());
-                password.setText(player.getPassword());
+                final GameList gameList = database.GetGame(gameName);
 
-                final String whereFirstNameIs = firstLastName[0].toString();
+                editText1.setText(gameList.getGameName());
+                editText2.setText(gameList.getGameDescription());
+                editText3.setText(Integer.toString(gameList.getPublisherID()));
+                editText4.setText(Integer.toString(gameList.getDeveloperID()));
+                editText5.setText(Integer.toString(gameList.getGenreID()));
+
+                final String whereGameIS = gameName;
 
                 // set dialog message
                 alertDialogBuilder
@@ -69,15 +70,19 @@ public class ViewGame extends Activity {
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
 
-                                        String fName = firstName.getText().toString();
-                                        String lName = lastName.getText().toString();
-                                        String userN = userName.getText().toString();
-                                        String pass = password.getText().toString();
-                                        player.setFirstName(fName);
-                                        player.setLastName(lName);
-                                        player.setUserName(userN);
-                                        player.setPassword(pass);
-                                        database.ModifyPlayer(player,whereFirstNameIs);
+                                        String gName = editText1.getText().toString();
+                                        String gDescription = editText2.getText().toString();
+                                        int pubID = Integer.parseInt(editText3.getText().toString());
+                                        int devID = Integer.parseInt(editText4.getText().toString());
+                                        int genID = Integer.parseInt(editText5.getText().toString());
+
+                                        gameList.setGameName(gName);
+                                        gameList.setGameDescription(gDescription);
+                                        gameList.setPublisherID(pubID);
+                                        gameList.setDeveloperID(devID);
+                                        gameList.setGenreID(genID);
+
+                                        database.ModifyGame(gameList, whereGameIS);
                                         Toast.makeText(ViewGame.this, "Game Modified", Toast.LENGTH_SHORT).show();
                                     }
                                 })

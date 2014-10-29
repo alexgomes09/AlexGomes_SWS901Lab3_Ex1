@@ -175,11 +175,11 @@ public class DatabaseManager extends SQLiteOpenHelper {
             cursor.moveToFirst();
         }
         GameList game = new GameList();
-        game.setGameName(cursor.getString(2));
-        game.setGameDescription(cursor.getString(3));
-        game.setPublisherID(cursor.getInt(4));
-        game.setDeveloperID(cursor.getInt(5));
-        game.setGenreID(cursor.getInt(6));
+        game.setGameName(cursor.getString(1));
+        game.setGameDescription(cursor.getString(2));
+        game.setPublisherID(cursor.getInt(3));
+        game.setDeveloperID(cursor.getInt(4));
+        game.setGenreID(cursor.getInt(5));
         return game;
     }
 
