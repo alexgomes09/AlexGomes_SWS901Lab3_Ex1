@@ -55,8 +55,6 @@ public class GameList extends Activity{
                 startActivity(intent);
             }
         });
-
-
     }
 
     String gameName;

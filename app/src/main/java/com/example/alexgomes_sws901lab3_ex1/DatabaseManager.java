@@ -26,6 +26,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         String CREATE_GAMELIST_TABLE = "CREATE TABLE GameList ("+"game_id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "+"game_name VARCHAR, "+"game_description VARCHAR, "+"publisher_id INTEGER, "+"developer_id INTEGER, "+"genre_id INTEGER)";
         db.execSQL(CREATE_PLAYER_TABLE);
         db.execSQL(CREATE_GAMELIST_TABLE);
+
     }
 
     @Override
@@ -152,15 +153,70 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public void AddGame(GameList gameList){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(gameName,gameList.getGameName());
-        cv.put(gameDescription,gameList.getGameDescription());
-        cv.put(publisherID,gameList.getPublisherID());
-        cv.put(developerID,gameList.getDeveloperID());
-        cv.put(genreID,gameList.getGenreID());
+
+        cv.put(GAMELIST_COLUMN[1],gameList.getGameName());
+        cv.put(GAMELIST_COLUMN[2],gameList.getGameDescription());
+        cv.put(GAMELIST_COLUMN[3],gameList.getPublisherID());
+        cv.put(GAMELIST_COLUMN[4],gameList.getDeveloperID());
+        cv.put(GAMELIST_COLUMN[5],gameList.getGenreID());
 
         database.insert(GAMELIST_TABLE,null,cv);
         database.close();
 
+    }
+
+    public GameList GetGame(String gameName){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String getGameQuery = "SELECT * FROM "+GAMELIST_TABLE+" WHERE "+GAMELIST_COLUMN[1]+" = '"+gameName+"'";
+        Cursor cursor = db.rawQuery(getGameQuery,null);
+
+        if(cursor !=null){
+            cursor.moveToFirst();
+        }
+        GameList game = new GameList();
+        game.setGameName(cursor.getString(2));
+        game.setGameDescription(cursor.getString(3));
+        game.setPublisherID(cursor.getInt(4));
+        game.setDeveloperID(cursor.getInt(5));
+        game.setGenreID(cursor.getInt(6));
+        return game;
+    }
+
+    public String[] GetAllGame() {
+        SQLiteDatabase database = this.getWritableDatabase();
+        String query = "SELECT  * FROM " + GAMELIST_TABLE;
+        Cursor cursor = database.rawQuery(query,null);
+
+        String[] array = new String[cursor.getCount()];
+        int i=0;
+        while (cursor.moveToNext()){
+            String gameName = cursor.getString(cursor.getColumnIndex(GAMELIST_COLUMN[1]));
+            array[i] = gameName ;
+            i++;
+        }
+        return array;
+    }
+
+    public void ModifyGame(GameList gameList, String whereGameis) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(GAMELIST_COLUMN[1], gameList.getGameName());
+        contentValues.put(GAMELIST_COLUMN[2],gameList.getGameDescription());
+        contentValues.put(GAMELIST_COLUMN[3],gameList.getPublisherID());
+        contentValues.put(GAMELIST_COLUMN[4],gameList.getDeveloperID());
+        contentValues.put(GAMELIST_COLUMN[4],gameList.getGenreID());
+        database.update(GAMELIST_TABLE,contentValues,GAMELIST_COLUMN[1]+"=?",new String[]{String.valueOf(whereGameis)});
+        database.close();
+    }
+
+    public void DeleteGame(String gameName){
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        String query = "delete from "+GAMELIST_TABLE+" where "+GAMELIST_COLUMN[1]+" = '"+gameName+"'";
+
+        SQLiteStatement stmt = database.compileStatement(query);
+        stmt.execute();
     }
 
 
