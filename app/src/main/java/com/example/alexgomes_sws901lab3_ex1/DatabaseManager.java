@@ -23,10 +23,18 @@ public class DatabaseManager extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_PLAYER_TABLE = "CREATE TABLE Player ("+"player_id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "+"firstname VARCHAR, "+"lastname VARHCAR, "+"username VARCHAR, "+"password VARCHAR)";
-        String CREATE_GAMELIST_TABLE = "CREATE TABLE GameList ("+"game_id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "+"game_name VARCHAR, "+"game_description VARCHAR, "+"publisher_id INTEGER, "+"developer_id INTEGER, "+"genre_id INTEGER)";
-        db.execSQL(CREATE_PLAYER_TABLE);
-        db.execSQL(CREATE_GAMELIST_TABLE);
+        String CREATE_GAMELIST_TABLE = "CREATE TABLE GameList ("+"game_id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "+"game_name VARCHAR, "+"game_description VARCHAR, "+"publisher_id INTEGER, "+"developer_id INTEGER, "+"genre_id INTEGER,"+"FOREIGN KEY(publisher_id) REFERENCES Publisher(publisher_id),"+" FOREIGN KEY(developer_id) REFERENCES Developer(developer_id),"+"FOREIGN KEY(genre_id)REFERENCES Genre(genre_id))";
+        String CREATE_PUBLISHER_TABLE = "CREATE TABLE Publisher ("+"publisher_id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "+"publisher_name VARCHAR, "+"website VARCHAR)";
+        String CREATE_DEVELOPER_TABLE = "CREATE TABLE Developer ("+"developer_id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "+"developer_name VARCHAR)";
+        String CREATE_GENRE_TABLE = "CREATE TABLE Genre ("+"genre_id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "+"description VARCHAR)";
+        String CREATE_PLAYER_AND_GAME_TABLE= "CREATE TABLE PlayerAndGame("+"player_game_id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ,"+"player_id INTEGER, "+"game_id INTEGER, "+"score INTEGER,"+"date_time VARCHAR, "+" FOREIGN KEY(player_id) REFERENCES Player(player_id),"+" FOREIGN KEY(game_id) REFERENCES GameList(game_id))";
 
+        db.execSQL(CREATE_PLAYER_TABLE);
+        db.execSQL(CREATE_PUBLISHER_TABLE);
+        db.execSQL(CREATE_DEVELOPER_TABLE);
+        db.execSQL(CREATE_GENRE_TABLE);
+        db.execSQL(CREATE_GAMELIST_TABLE);
+        db.execSQL(CREATE_PLAYER_AND_GAME_TABLE);
     }
 
     @Override
@@ -218,11 +226,4 @@ public class DatabaseManager extends SQLiteOpenHelper {
         SQLiteStatement stmt = database.compileStatement(query);
         stmt.execute();
     }
-
-
-
-
-
-
-
 }
