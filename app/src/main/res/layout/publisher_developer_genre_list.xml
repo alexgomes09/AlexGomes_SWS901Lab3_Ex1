@@ -6,7 +6,7 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/publisherList"
+        android:id="@+id/publisher_developer_genre_list"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView1" />

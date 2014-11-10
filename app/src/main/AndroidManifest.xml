@@ -32,8 +32,7 @@
             android:label="@string/view_game_list">
         </activity>
         <activity
-            android:name=".Publisher"
-            android:label="@string/publisher_list">
+            android:name=".PublisherDeveloperGenre">
         </activity>
 
     </application>

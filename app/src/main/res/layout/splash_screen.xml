@@ -70,4 +70,30 @@
         android:layout_alignParentEnd="true"
         android:height="45dp" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:text="@string/splash_screen_btnDeveloper"
+        android:id="@+id/splash_screen_btnDeveloper"
+        android:layout_alignTop="@+id/splash_screen_btnViewPlayer"
+        android:layout_toRightOf="@+id/splash_screen_btnViewPlayer"
+        android:layout_toEndOf="@+id/splash_screen_btnViewPlayer"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:height="45dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:text="@string/splash_screen_btnGenre"
+        android:id="@+id/splash_screen_btnGenre"
+        android:layout_alignTop="@+id/splash_screen_btnAddGame"
+        android:layout_toRightOf="@+id/splash_screen_btnAddGame"
+        android:layout_toEndOf="@+id/splash_screen_btnAddGame"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:height="45dp" />
+
 </RelativeLayout>

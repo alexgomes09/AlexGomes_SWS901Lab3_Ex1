@@ -269,4 +269,56 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return array;
     }
 
+    /*
+    * Developer Table;
+    */
+
+    private static final String DEVELOPER_TABLE = "Developer";
+    // Developers LIST column names
+    private static final String developer_id = "developer_id";
+    private static final String developer_name= "developer_name";
+
+    private static final String[] DEVELOPER_COLUMN ={developer_id,developer_name};
+
+    public String[] GetAllDeveloper() {
+        SQLiteDatabase database = this.getWritableDatabase();
+        String query = "SELECT  * FROM " + DEVELOPER_TABLE;
+        Cursor cursor = database.rawQuery(query,null);
+
+        String[] array = new String[cursor.getCount()];
+        int i=0;
+        while (cursor.moveToNext()){
+            String publisherName = cursor.getString(cursor.getColumnIndex(DEVELOPER_COLUMN[1]));
+            array[i] = publisherName ;
+            i++;
+        }
+        return array;
+    }
+
+    /*
+    * Genre Table;
+    */
+
+    private static final String GENRE_TABLE = "Genre";
+    // Genre Column column names
+    private static final String genre_id = "genre_id";
+    private static final String description= "description";
+
+    private static final String[] GENRE_COLUMN ={genre_id,description};
+
+    public String[] GetAllGenre() {
+        SQLiteDatabase database = this.getWritableDatabase();
+        String query = "SELECT  * FROM " + GENRE_TABLE;
+        Cursor cursor = database.rawQuery(query,null);
+
+        String[] array = new String[cursor.getCount()];
+        int i=0;
+        while (cursor.moveToNext()){
+            String publisherName = cursor.getString(cursor.getColumnIndex(GENRE_COLUMN[1]));
+            array[i] = publisherName ;
+            i++;
+        }
+        return array;
+    }
+
 }
