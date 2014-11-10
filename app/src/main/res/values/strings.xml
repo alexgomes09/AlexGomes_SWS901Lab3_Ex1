@@ -8,10 +8,12 @@
     <string name="player_list">Player List</string>
     <string name="game_list">Add Game</string>
     <string name="view_game_list">Game List</string>
+    <string name="publisher_list">Publisher List</string>
     <string name="action_settings">Settings</string>
     <string name="splash_screen_btnAddPlayer">Add Player</string>
     <string name="splash_screen_btnViewPlayer">View Players</string>
     <string name="splash_screen_btnGameList">Add Game</string>
+    <string name="splash_screen_btnPublisher">Publisher</string>
 
     <!--Player Screen-->
 

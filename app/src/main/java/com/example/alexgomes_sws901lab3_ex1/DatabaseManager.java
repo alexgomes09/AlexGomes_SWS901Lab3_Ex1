@@ -35,6 +35,22 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.execSQL(CREATE_GENRE_TABLE);
         db.execSQL(CREATE_GAMELIST_TABLE);
         db.execSQL(CREATE_PLAYER_AND_GAME_TABLE);
+
+        //auto insert querys while make table
+
+        String INSERT_PLAYER = "INSERT INTO Player (firstname,lastname,username,password) VALUES (\"Irma\",\"Lindsey\",\"BrockRocha\",\"QAC70JXN5BP\"),(\"Blaze\",\"Mcmahon\",\"AdrianOsborn\",\"JRL50WSS5YB\"),(\"Herrod\",\"Carey\",\"CairoJohnson\",\"URO54ODX2TY\"),(\"Eliana\",\"Lowe\",\"MollieAllison\",\"IPO33AVY0ME\"),(\"Aimee\",\"Hutchinson\",\"AnnBailey\",\"EBT80ZBX3JA\"),(\"Felicia\",\"Coleman\",\"CassandraRobles\",\"PPF31KIU4TY\"),(\"Tana\",\"Mitchell\",\"GriffinPetersen\",\"MGH80JOU2LR\"),(\"Cara\",\"Williamson\",\"CatherineBradley\",\"NAH07IAY9LZ\"),(\"Bo\",\"Rowe\",\"ChristenPerkins\",\"FAQ98GRY6GF\"),(\"Lani\",\"Blackwell\",\"GarrisonDunlap\",\"VBS59BRZ4KB\"),(\"Erin\",\"Patton\",\"CeciliaMacias\",\"CYU01ZNJ2WN\"),(\"Hilary\",\"Frye\",\"JescieWebster\",\"MBP99SXP9NQ\"),(\"Forrest\",\"King\",\"JannaBlanchard\",\"XIS84YLH2IK\"),(\"Remedios\",\"Riddle\",\"KaseemWiggins\",\"OIL25UZO7QU\"),(\"Angelica\",\"Conrad\",\"MeganRios\",\"PLK46HGS5DU\")";
+        String INSERT_PLAYER_AND_GAME = "INSERT INTO PlayerAndGame (player_id,game_id,score,date_time) VALUES (18,12,6,23/03/2010),(6,8,54,05/09/2011),(28,23,43,15/11/2008),(17,28,32,13/08/2009),(7,11,43,23/05/2010),(12,28,92,10/10/2012),(29,22,41,25/01/2006),(21,30,27,31/03/2008),(4,26,2,31/03/2009),(23,4,13,23/08/2014),(21,17,58,25/06/2012),(9,2,17,12/02/2012),(18,13,7,10/01/2014),(21,30,24,13/03/2007),(13,26,15,18/02/2007)";
+        String INSERT_DEVELOPER = "INSERT INTO Developer (developer_name) VALUES (\"Bert\"),(\"Mariko\"),(\"Jesse\"),(\"Jack\"),(\"Oscar\"),(\"Vivien\"),(\"Kirby\"),(\"Elizabeth\"),(\"Glenna\"),(\"Michael\");";
+        String INSERT_PUBLISHER = "INSERT INTO Publisher (publisher_name,website) VALUES (\"Ginger Nash\",\"TallulahBrown.com\"),(\"Farrah Glover\",\"ChiquitaLogan.com\"),(\"Melyssa Ward\",\"PalomaFrench.com\"),(\"Zoe Brooks\",\"JaimePearson.com\"),(\"Kimberley Underwood\",\"IvanaDurham.com\"),(\"Miriam Page\",\"LauraSawyer.com\"),(\"Kirestin Stevens\",\"BoPage.com\"),(\"Karina Mclean\",\"YasirHolman.com\"),(\"Abigail Cleveland\",\"KeelyAllen.com\"),(\"Summer Ratliff\",\"DanielleRoman.com\")";
+        String INSERT_GAMELIST = "INSERT INTO GameList (game_name,game_description,publisher_id,developer_id,genre_id) VALUES (\"Call Of Duty\",\"Lorem ipsum\",7,10,4),(\"FarCry\",\"Lorem ipsum dolor. Curabitur sed\",3,7,6),(\"KnightRiders\",\"Lorem ipsum dolor sit amet,\",8,1,4),(\"FarCry 4\",\"Lorem ipsum dolor sit amet,\",8,3,4),(\"AdamsBall\",\"Lorem ipsum dolor sit amet,\",8,3,3)";
+        String INSERT_GENRE = "INSERT INTO Genre (description) VALUES (\"Lorem ipsum dolor sit\"),(\"Lorem ipsum dolor sit\"),(\"Lorem ipsum dolor sit\"),(\"Lorem\"),(\"Lorem ipsum dolor\")";
+
+        db.execSQL(INSERT_PLAYER);
+        db.execSQL(INSERT_PLAYER_AND_GAME);
+        db.execSQL(INSERT_DEVELOPER);
+        db.execSQL(INSERT_PUBLISHER);
+        db.execSQL(INSERT_GAMELIST);
+        db.execSQL(INSERT_GENRE);
     }
 
     @Override
@@ -190,7 +206,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
         game.setGenreID(cursor.getInt(5));
         return game;
     }
-
     public String[] GetAllGame() {
         SQLiteDatabase database = this.getWritableDatabase();
         String query = "SELECT  * FROM " + GAMELIST_TABLE;
@@ -226,4 +241,32 @@ public class DatabaseManager extends SQLiteOpenHelper {
         SQLiteStatement stmt = database.compileStatement(query);
         stmt.execute();
     }
+
+    /*
+    * Publisher Table;
+    */
+
+    private static final String PUBLISHER_TABLE = "Publisher";
+    // Game LIST column names
+    private static final String publisher_id = "publisher_id";
+    private static final String publisher_name= "publisher_name";
+    private static final String website = "website";
+
+    private static final String[] PUBLISHER_COLUMN ={publisher_id,publisher_name,website};
+
+    public String[] GetAllPublisher() {
+        SQLiteDatabase database = this.getWritableDatabase();
+        String query = "SELECT  * FROM " + PUBLISHER_TABLE;
+        Cursor cursor = database.rawQuery(query,null);
+
+        String[] array = new String[cursor.getCount()];
+        int i=0;
+        while (cursor.moveToNext()){
+            String publisherName = cursor.getString(cursor.getColumnIndex(PUBLISHER_COLUMN[1]));
+            array[i] = publisherName ;
+            i++;
+        }
+        return array;
+    }
+
 }
